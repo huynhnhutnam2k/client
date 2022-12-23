@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const HomeLatest = () => {
-  const { products } = useSelector((state) => state.product);
+  const { products, isLoading } = useSelector((state) => state.product);
   const { isMobile } = useSelector((state) => state.stateDevide);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -16,21 +16,29 @@ const HomeLatest = () => {
       <div className="text-center text-[50px] font-bold uppercase text-black ">
         Sản phẩm mới nhất
       </div>
-      <div
-        className={`overflow-hidden grid ${
-          isMobile ? "grid-cols-2" : "grid-cols-4"
-        } gap-2`}
-      >
-        {products?.map((item) => (
-          <Pro item={item}></Pro>
-        ))}
-      </div>
-      <Link
-        to="/products"
-        className="mx-auto text-center block my-4 uppercase w-[120px] p-2 border-2 border-black bg-[#000] text-[#fff] hover:bg-[#fff] hover:text-[#000] duration-200"
-      >
-        Xem thêm
-      </Link>
+      {isLoading ? (
+        <div className="flex justify-center items-center w-full h-full">
+          <div className="w-10 h-10 border-4 border-blue-500 rounded-full animate-spin border-t-transparent"></div>
+        </div>
+      ) : (
+        <>
+          <div
+            className={`overflow-hidden grid ${
+              isMobile ? "grid-cols-2" : "grid-cols-4"
+            } gap-2`}
+          >
+            {products?.map((item) => (
+              <Pro item={item}></Pro>
+            ))}
+          </div>
+          <Link
+            to="/products"
+            className="mx-auto text-center block my-4 uppercase w-[120px] p-2 border-2 border-black bg-[#000] text-[#fff] hover:bg-[#fff] hover:text-[#000] duration-200"
+          >
+            Xem thêm
+          </Link>
+        </>
+      )}
     </div>
   );
 };

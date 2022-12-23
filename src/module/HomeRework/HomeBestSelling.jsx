@@ -5,7 +5,7 @@ import { v4 } from "uuid";
 import LoadingSkeleton from "components/loading/loadingSkeleton";
 import { getAllProduct } from "app/productSlice";
 const HomeBestSelling = () => {
-  const { products, loading } = useSelector((state) => state.product);
+  const { products, isLoading } = useSelector((state) => state.product);
   const { isMobile } = useSelector((state) => state.stateDevide);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,7 +22,7 @@ const HomeBestSelling = () => {
           isMobile ? "grid-cols-2" : "grid-cols-4"
         } gap-2`}
       >
-        {loading && (
+        {isLoading && (
           <div
             className={` grid ${
               isMobile ? "grid-cols-2" : "grid-cols-4"
@@ -33,7 +33,7 @@ const HomeBestSelling = () => {
             ))}
           </div>
         )}
-        {!loading &&
+        {!isLoading &&
           products?.length > 0 &&
           products
             ?.slice()
