@@ -22,17 +22,10 @@ const HomeBestSelling = () => {
           isMobile ? "grid-cols-2" : "grid-cols-4"
         } gap-2`}
       >
-        {isLoading && (
-          <div
-            className={` grid ${
-              isMobile ? "grid-cols-2" : "grid-cols-4"
-            } gap-2`}
-          >
-            {new Array(4).fill(0).map(() => (
-              <LoadingSkeleton key={v4()}></LoadingSkeleton>
-            ))}
-          </div>
-        )}
+        {isLoading &&
+          new Array(4)
+            .fill(0)
+            .map(() => <LoadingSkeleton key={v4()}></LoadingSkeleton>)}
         {!isLoading &&
           products?.length > 0 &&
           products
